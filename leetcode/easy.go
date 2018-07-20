@@ -109,3 +109,120 @@ func isPalindrome(abc int) bool {
 	}
 	return abc == x+r
 }
+
+// romanToInt
+//
+// Problem: https://leetcode-cn.com/problems/roman-to-integer/description/
+// Reference:
+//
+// @param s: roman number
+// @return:
+//
+func romanToInt(s string) int {
+	dataSet := map[string]int{
+		"I": 1,
+		"V": 5,
+		"X": 10,
+		"L": 50,
+		"C": 100,
+		"D": 500,
+		"M": 1000,
+	}
+	ret := 0
+	for i := len(s) - 1; i > 0; i-- {
+		if dataSet[string(s[i])] > dataSet[string(s[i-1])] {
+			ret += dataSet[string(s[i])] - dataSet[string(s[i-1])]
+			if i == 1 {
+				return ret
+			}
+			i--
+			continue
+		} else {
+			ret += dataSet[string(s[i])]
+		}
+	}
+	ret += dataSet[string(s[0])]
+	return ret
+}
+
+// longestCommonPrefix
+//
+// Problem: https://leetcode-cn.com/problems/longest-common-prefix/description/
+// Reference:
+//
+// @param s: roman number
+// @return:
+//
+func longestCommonPrefix(strs []string) string {
+	if len(strs) == 0 || len(strs[0]) == 0 {
+		return ""
+	}
+	prefix := make([]uint8, 0)
+
+OutLoop:
+	for i := 0; i < len(strs[0]); i++ {
+		temp := strs[0][i]
+		for j := 0; j < len(strs); j++ {
+			if len(strs[j]) <= i {
+				break OutLoop
+			}
+			if strs[j][i] == temp {
+				continue
+			} else {
+				break OutLoop
+			}
+		}
+		prefix = append(prefix, temp)
+	}
+	return string(prefix)
+}
+
+// isValid
+//
+// Problem: https://leetcode-cn.com/problems/valid-parentheses/description/
+// Reference:
+//
+// @param s: roman number
+// @return:
+//
+func isValid(s string) bool {
+	if len(s) == 0 {
+		return true
+	}
+	//if len(s) == 1{
+	//	return false
+	//}
+	//length := len(s)
+	stack := make([]byte, 0)
+
+	for v := range s {
+		if s[v] == '(' || s[v] == '{' || s[v] == '[' {
+			stack = append(stack, s[v])
+		} else {
+			if len(stack) == 0 {
+				return false
+			}
+			switch s[v] {
+			case ')':
+				if stack[len(stack)-1] != '(' {
+					return false
+				}
+				break
+			case '}':
+				if stack[len(stack)-1] != '{' {
+					return false
+				}
+				break
+			case ']':
+				if stack[len(stack)-1] != '[' {
+					return false
+				}
+				break
+			default:
+				return false
+			}
+			stack = stack[:len(stack)-1]
+		}
+	}
+	return len(stack) == 0
+}
