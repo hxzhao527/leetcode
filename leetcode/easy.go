@@ -11,10 +11,6 @@ package leetcode
 // Problem: https://leetcode-cn.com/problems/two-sum/description/
 // Reference:
 //
-// @param nums: An integer array
-// @param target: An integer
-// @return: The position of a and b
-//
 func twoSum(nums []int, target int) []int {
 	part := make(map[int][]int)
 	// control the order of output, because of hashMap
@@ -58,9 +54,6 @@ func twoSum(nums []int, target int) []int {
 // Problem: https://leetcode-cn.com/problems/reverse-integer/description/
 // Reference:
 //
-// @param abc: target to reverse
-// @return: 0 or cba
-//
 func reverse(abc int) int {
 	// can not compare abc to some value then return 0
 	// e.g. 15000000000
@@ -91,9 +84,6 @@ func reverse(abc int) int {
 // Problem: https://leetcode-cn.com/problems/palindrome-number/description/
 // Reference:
 //
-// @param abc: target to reverse
-// @return:
-//
 func isPalindrome(abc int) bool {
 	if abc >= 0 && abc <= 9 {
 		return true
@@ -114,9 +104,6 @@ func isPalindrome(abc int) bool {
 //
 // Problem: https://leetcode-cn.com/problems/roman-to-integer/description/
 // Reference:
-//
-// @param s: roman number
-// @return:
 //
 func romanToInt(s string) int {
 	dataSet := map[string]int{
@@ -150,9 +137,6 @@ func romanToInt(s string) int {
 // Problem: https://leetcode-cn.com/problems/longest-common-prefix/description/
 // Reference:
 //
-// @param s: roman number
-// @return:
-//
 func longestCommonPrefix(strs []string) string {
 	if len(strs) == 0 || len(strs[0]) == 0 {
 		return ""
@@ -181,9 +165,6 @@ OutLoop:
 //
 // Problem: https://leetcode-cn.com/problems/valid-parentheses/description/
 // Reference:
-//
-// @param s: roman number
-// @return:
 //
 func isValid(s string) bool {
 	if len(s) == 0 {
@@ -225,4 +206,67 @@ func isValid(s string) bool {
 		}
 	}
 	return len(stack) == 0
+}
+
+// mergeTwoLists
+//
+// Problem: https://leetcode-cn.com/problems/merge-two-sorted-lists/description/
+// Reference:
+//
+func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1 == nil {
+		return l2
+	}
+	if l2 == nil {
+		return l1
+	}
+	var start1 = new(ListNode)
+	position := start1
+
+	for l1 != nil && l2 != nil {
+		if l1.Val > l2.Val {
+			position.Next = l2
+			l2 = l2.Next
+		} else if l1.Val == l2.Val {
+			position.Next = l1
+			l1 = l1.Next
+		} else {
+			position.Next = l1
+			l1 = l1.Next
+		}
+		position = position.Next
+	}
+	if l1 != nil {
+		position.Next = l1
+	}
+	if l2 != nil {
+		position.Next = l2
+	}
+
+	return start1.Next
+}
+
+// mergeTwoLists
+//
+// Problem: https://leetcode-cn.com/problems/valid-parentheses/description/
+// Reference:
+//
+func removeDuplicates(nums []int) int {
+	if nums == nil || len(nums) == 0 {
+		return 0
+	}
+	curVal := nums[0]
+	curInd := 0
+	for i := range nums {
+		if curVal == nums[i] {
+			continue
+		} else {
+			nums[curInd] = curVal
+
+			curInd++
+			curVal = nums[i]
+		}
+	}
+	nums[curInd] = curVal
+	return curInd + 1
 }
