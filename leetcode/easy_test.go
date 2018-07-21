@@ -140,3 +140,10 @@ func TestStrStr(t *testing.T) {
 	ret := strStr(source, target)
 	assert.Equal(t, expect, ret, "strStr failed, input is %s, %s, expect %d, but get %d", source, target, expect, ret)
 }
+
+func TestSearchInsert(t *testing.T) {
+	input := []int{1, 3}
+	target := 3
+	expect := 1
+	assert.Equal(t, expect, searchInsert(input, target), "searchInsert failed")
+}

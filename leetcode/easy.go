@@ -341,3 +341,34 @@ func strStr(haystack string, needle string) int {
 	}
 	return -1
 }
+
+// searchInsert
+//
+// Problem: https://leetcode-cn.com/problems/search-insert-position/description/
+// Reference:
+//
+func searchInsert(nums []int, target int) int {
+	if nums == nil || len(nums) == 0 {
+		return 0
+	}
+	if target < nums[0] {
+		return 0
+	}
+	if target > nums[len(nums)-1] {
+		return len(nums)
+	}
+	offset := 0
+	for mid := len(nums) / 2; len(nums) > 2; mid = len(nums) / 2 {
+		if target > nums[mid] {
+			offset = offset + mid
+			nums = nums[mid:]
+		} else {
+			nums = nums[:mid+1]
+		}
+	}
+	if nums[0] == target {
+		return offset
+	} else {
+		return offset + 1
+	}
+}

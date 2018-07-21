@@ -246,24 +246,30 @@ func strStr(source, target string) int {
 // @return: The first position of target. Position starts from 0.
 //
 func binarySearch(nums []int, target int) int {
-	//index := -1
-	minIndex := 0
-	maxIndex := len(nums) - 1
-	if nums[minIndex] > target || nums[maxIndex] < target {
+	startSpace := 0
+	if nums == nil || len(nums) == 0 {
 		return -1
 	}
-	avgIndex := len(nums) / 2
-	for minIndex != avgIndex {
-		if nums[maxIndex] != target {
-			if target > nums[avgIndex] {
-				minIndex = avgIndex
-			} else {
-				maxIndex = avgIndex
-			}
-			avgIndex = (maxIndex + minIndex + 1) / 2
+	if nums[0] > target || nums[len(nums)-1] < target {
+		return -1
+	}
+	var mid int
+	for len(nums) > 2 {
+
+		mid = len(nums) / 2
+
+		if target > nums[mid] {
+			startSpace = startSpace + mid
+			nums = nums[mid:]
 		} else {
-			return maxIndex
+			nums = nums[:mid+1]
 		}
 	}
-	return -1
+	if nums[0] == target {
+		return startSpace
+	} else if nums[1] == target {
+		return startSpace + 1
+	} else {
+		return -1
+	}
 }
