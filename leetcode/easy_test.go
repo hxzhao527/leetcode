@@ -46,7 +46,7 @@ func TestRomanToInt(t *testing.T) {
 
 func TestLongestCommonPrefix(t *testing.T) {
 	dataSet := map[string][]string{
-		"fl": []string{"flower", "flow", "flight"},
+		"fl": {"flower", "flow", "flight"},
 		//"": {"dog","racecar","car"},
 		"a": {"aa", "a"},
 		"":  nil,
@@ -122,4 +122,21 @@ func TestRemoveDuplicates(t *testing.T) {
 	length := 5
 	assert.Equal(t, length, removeDuplicates(input), "remove failed")
 	assert.Equal(t, expect, input[:length], "remove result not equal")
+}
+
+func TestRemoveElement(t *testing.T) {
+	input := []int{0, 1, 2, 2, 3, 0, 4, 2}
+	val := 2
+	expect := []int{0, 1, 3, 0, 4}
+	length := 5
+	assert.Equal(t, length, removeElement(input, val), "remove failed")
+	assert.Equal(t, expect, input[:length], "remove result not equal")
+}
+
+func TestStrStr(t *testing.T) {
+	source := "tartarget"
+	target := "target"
+	expect := 3
+	ret := strStr(source, target)
+	assert.Equal(t, expect, ret, "strStr failed, input is %s, %s, expect %d, but get %d", source, target, expect, ret)
 }

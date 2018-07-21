@@ -246,9 +246,9 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	return start1.Next
 }
 
-// mergeTwoLists
+// removeDuplicates
 //
-// Problem: https://leetcode-cn.com/problems/valid-parentheses/description/
+// Problem: https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/description/
 // Reference:
 //
 func removeDuplicates(nums []int) int {
@@ -269,4 +269,75 @@ func removeDuplicates(nums []int) int {
 	}
 	nums[curInd] = curVal
 	return curInd + 1
+}
+
+// removeElement
+//
+// Problem: https://leetcode-cn.com/problems/remove-element/description/
+// Reference:
+//
+func removeElement(nums []int, val int) int {
+	if nums == nil || len(nums) == 0 {
+		return 0
+	}
+	curInd := 0
+	for i := range nums {
+		if nums[i] == val {
+			continue
+		} else {
+			nums[curInd] = nums[i]
+			curInd++
+		}
+	}
+	return curInd
+}
+
+// strStr
+//
+// Problem: https://leetcode-cn.com/problems/implement-strstr/description/
+// Reference: http://www.ruanyifeng.com/blog/2013/05/Knuth–Morris–Pratt_algorithm.html
+// Reference: https://www.cnblogs.com/yjiyjige/p/3263858.html
+//
+func strStr(haystack string, needle string) int {
+	if len(needle) == 0 {
+		return 0
+	}
+	nextMap := func(raw string) []int {
+		nextMap := make([]int, len(raw))
+		nextMap[0] = -1
+		k := -1
+		for j := 0; j < len(raw)-1; {
+			if k == -1 || raw[j] == raw[k] {
+				k++
+				j++
+				nextMap[j] = k
+			} else {
+				k = nextMap[k]
+			}
+		}
+		//nextMap[0] = 0
+		return nextMap
+	}(needle)
+	//fmt.Printf("next map: %v", nextMap)
+
+	for i, j := 0, 0; i < len(haystack); {
+		if haystack[i] == needle[j] {
+			i++
+			j++
+			if j < len(needle) {
+				continue
+			} else {
+				return i - j
+			}
+		} else {
+			next := nextMap[j]
+			if j == 0 {
+				i = i + (j - next)
+				j = 0
+			} else {
+				j = next
+			}
+		}
+	}
+	return -1
 }
