@@ -148,8 +148,17 @@ func TestSearchInsert(t *testing.T) {
 	assert.Equal(t, expect, searchInsert(input, target), "searchInsert failed")
 }
 
+func TestCountAndSay(t *testing.T) {
+	countAndSay(1)
+	t.Log("cann't understand the question!")
+}
+
 func TestMaxSubArray(t *testing.T) {
 	input := []int{-1, -2, 1}
 	expect := 1
 	assert.Equal(t, expect, maxSubArray(input), "maxSubArray failed")
+}
+func TestLengthOfLastWord(t *testing.T) {
+	lengthOfLastWord("")
+	t.Log("cann't understand the question!")
 }
