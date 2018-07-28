@@ -372,3 +372,36 @@ func searchInsert(nums []int, target int) int {
 		return offset + 1
 	}
 }
+
+// searchInsert
+//
+// Problem: https://leetcode-cn.com/problems/count-and-say/description/
+// Reference:
+//
+func countAndSay(n int) string {
+	return "foo"
+}
+
+// searchInsert
+//
+// Problem: https://leetcode-cn.com/problems/maximum-subarray/description/
+// Reference: http://www.kitabxana.net/files/books/file/1354098277.pdf
+//
+func maxSubArray(nums []int) int {
+
+	maxSubSum, thisSubSum := 0, 0
+	// because int var default value is 0,
+	// so, if all elements in slice is negative, the max value should be the first, not 0
+	start := true
+	for _, num := range nums {
+		thisSubSum += num
+		if thisSubSum > maxSubSum || start {
+			maxSubSum = thisSubSum
+		}
+		if thisSubSum < 0 {
+			thisSubSum = 0
+		}
+		start = false
+	}
+	return maxSubSum
+}

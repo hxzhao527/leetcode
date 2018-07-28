@@ -147,3 +147,9 @@ func TestSearchInsert(t *testing.T) {
 	expect := 1
 	assert.Equal(t, expect, searchInsert(input, target), "searchInsert failed")
 }
+
+func TestMaxSubArray(t *testing.T) {
+	input := []int{-1, -2, 1}
+	expect := 1
+	assert.Equal(t, expect, maxSubArray(input), "maxSubArray failed")
+}
