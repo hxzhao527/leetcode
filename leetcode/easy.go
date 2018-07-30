@@ -6,10 +6,6 @@ solved by hxzhao(haoxiangzhao@outlook.com)
 */
 package leetcode
 
-import (
-	"strconv"
-)
-
 // twoSum
 //
 // Problem: https://leetcode-cn.com/problems/two-sum/description/
@@ -383,7 +379,8 @@ func searchInsert(nums []int, target int) int {
 // Reference:
 //
 func countAndSay(n int) string {
-	return strconv.Itoa(n)
+	n = n
+	return ""
 }
 
 // searchInsert
@@ -418,4 +415,36 @@ func maxSubArray(nums []int) int {
 func lengthOfLastWord(s string) int {
 	s = s
 	return 0
+}
+
+// searchInsert
+//
+// Problem: https://leetcode-cn.com/problems/plus-one/description/
+// Reference:
+//
+func plusOne(digits []int) []int {
+	length := len(digits)
+	if length == 0 {
+		return []int{1}
+	}
+	if digits[length-1] != 9 {
+		digits[length-1] += 1
+		return digits
+	}
+
+	digits[len(digits)-1] = 0
+
+	if len(digits) != 1 {
+		plusOne(digits[:length-1])
+		//digits = append(digits, 0)
+	} else {
+		digits = append(digits, 0)
+		copy(digits[1:], digits[:])
+		digits[0] = 1
+	}
+	// make up the tail 0
+	if length >= 2 && digits[0] == 1 && digits[1] == 0 {
+		digits = append(digits, 0)
+	}
+	return digits
 }

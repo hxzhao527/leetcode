@@ -158,7 +158,14 @@ func TestMaxSubArray(t *testing.T) {
 	expect := 1
 	assert.Equal(t, expect, maxSubArray(input), "maxSubArray failed")
 }
+
 func TestLengthOfLastWord(t *testing.T) {
 	lengthOfLastWord("")
 	t.Log("cann't understand the question!")
+}
+
+func TestPlusOne(t *testing.T) {
+	input := []int{9}
+	expect := []int{1, 0}
+	assert.Equal(t, expect, plusOne(input), "plusOne failed")
 }
