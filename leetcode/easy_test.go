@@ -9,8 +9,8 @@ func TestTwoSum(t *testing.T) {
 	input := []int{3, 2, 4}
 	target := 6
 	expect := []int{1, 2}
-	ret := twoSum(input, target)
-	assert.Equal(t, expect, ret, "twoSum failed")
+	ret := TwoSum(input, target)
+	assert.Equal(t, expect, ret, "TwoSum failed")
 }
 
 func TestReverse(t *testing.T) {

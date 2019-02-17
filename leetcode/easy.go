@@ -6,43 +6,37 @@ solved by hxzhao(haoxiangzhao@outlook.com)
 */
 package leetcode
 
-// twoSum
+import "sort"
+
+// 1.TwoSum
 //
 // Problem: https://leetcode-cn.com/problems/two-sum/description/
 // Reference:
 //
-func twoSum(nums []int, target int) []int {
+func TwoSum(nums []int, target int) []int {
 	part := make(map[int][]int)
-	// control the order of output, because of hashMap
-	com := func(a, b int) []int {
-		if a < b {
-			return []int{a, b}
-		} else {
-			return []int{b, a}
-		}
-	}
-	for i, num := range nums {
-		// num maybe negative, so the comparison is not need
-		//if num <= target {
-		if part[num] == nil {
+	for index, num := range nums {
+		if _, ok := part[num]; !ok {
 			part[num] = make([]int, 0)
 		}
-		part[num] = append(part[num], i)
-		//}
+		part[num] = append(part[num], index)
 	}
-	for num, in := range part {
-		if in2, ok := part[target-num]; ok {
-			// different num plus to target
-			if len(in) == len(in2) && len(in) == 1 {
-				if in[0] != in2[0] {
-					return com(in[0], in2[0])
+
+	for num, index := range part {
+		if _, ok := part[target-num]; ok {
+			if num == target-num {
+				if len(index) > 1 {
+					return index
+				} else {
+					continue
 				}
-			}
-			// equivalent num plus to target
-			// because of the description of question, there is only one combination,
-			// so it's no need to slice the result.
-			if len(in) > 1 {
-				return in
+			} else {
+				ret := make([]int, 0)
+				// almost one solution
+				ret = append(ret, index...)
+				ret = append(ret, part[target-num]...)
+				sort.Ints(ret)
+				return ret
 			}
 		}
 	}

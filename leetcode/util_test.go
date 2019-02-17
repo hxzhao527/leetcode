@@ -1,7 +1,7 @@
 package leetcode
 
 import (
-	"github.com/stretchr/testify/assert"
+	// "github.com/stretchr/testify/assert"
 	"testing"
 )
 
@@ -26,6 +26,7 @@ func TestCompareListNode(t *testing.T) {
 	//		},
 	//	},
 	//}
-	expect := 0
-	assert.Equal(t, expect, CompareListNode(s1, s1), "compare not well")
+	if ret := CompareListNode(s1, s1); !ret {
+		t.Error("compare not well")
+	}
 }
